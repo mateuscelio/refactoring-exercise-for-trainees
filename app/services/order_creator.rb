@@ -25,7 +25,9 @@ class OrderCreator
     end
     order.save
 
-    order
+    return ServiceResult.success(order) if order.valid?
+
+    ServiceResult.errors(order.errors.full_messages)
   end
 
   def self.shipping_costs

@@ -13,19 +13,19 @@ RSpec.describe OrderCreator do
       zip: 'zip'
     }
   end
-  let(:cart) { Cart.create}
+  let(:cart) { Cart.create }
 
   context 'with valid user' do
     let(:user) { User.create(email: 'user@spec.io', first_name: 'John', last_name: 'Doe') }
 
     it 'creates valid order' do
-      expect(OrderCreator.call(user, cart, address_params).valid?).to eq(true)
+      expect { OrderCreator.call(user, cart, address_params) }.to change(Order, :count).by(1)
     end
   end
   context 'with invalid user' do
     let(:user) { User.create }
     it 'does not create valid order' do
-      expect(OrderCreator.call(user, cart, address_params).valid?).to eq(false)
+      expect(OrderCreator.call(user, cart, address_params).errors).to include({ message: 'User is invalid' })
     end
   end
 end
