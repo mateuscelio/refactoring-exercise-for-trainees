@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe CartUserCreator do
   context 'Cart with valid user' do
-    let(:user) { User.create(email: 'user@spec.io', first_name: 'John', last_name: 'Doe') }
+    let(:user) { create :user }
     let(:cart) { user.carts.create }
 
     it 'returns cart user' do
