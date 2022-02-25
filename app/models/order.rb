@@ -3,6 +3,8 @@ class Order < ApplicationRecord
 
   has_many :items, class_name: 'OrderLineItem', dependent: :destroy
 
+  validates_associated :user
+
   def subtotal_cents
     items.map(&:unit_price_cents).sum
   end
