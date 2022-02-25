@@ -16,7 +16,7 @@ module PurchaseProcesses
 
       return user_res unless user_res.success?
 
-      OrderCreator.call(user_res.value, cart, address)
+      OrderCreators::OrderCreator.call(user_res.value, cart, address)
     end
   end
 end
